@@ -25,6 +25,8 @@ class SettingsLauncher: NSObject {
         ]
     }()
     
+    var homeController: HomeController?
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -62,14 +64,17 @@ class SettingsLauncher: NSObject {
         }
     }
     
-    func handleDismiss() {
-        UIView.animate(withDuration: 0.5) {
-            self.blackView.alpha = 0
+    func handleDismiss(setting: Setting) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut,
+            animations: {
+                self.blackView.alpha = 0
             
-            if let window = UIApplication.shared.keyWindow {
-                self.collectionView.frame = CGRect(x: 0, y: window.frame.height,
-                    width: self.collectionView.frame.width,
-                    height: self.collectionView.frame.height)
+                if let window = UIApplication.shared.keyWindow {
+                    self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                }
+        }) { completed in
+            if setting.name != "" && setting.name != "Cancel" {
+                self.homeController?.showControllerForSetting(setting: setting)
             }
         }
     }
@@ -93,6 +98,11 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         
         cell.setting = settings[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        handleDismiss(setting: settings[indexPath.item])
+        
     }
 }
 
