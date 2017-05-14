@@ -16,10 +16,28 @@ class SettingCell: BaseCell {
             
             if let imageName = setting?.iconName {
                 icon.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+                icon.tintColor = .darkGray
             }
             
         }
     }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            self.backgroundColor = isHighlighted
+                ? .darkGray
+                : .white
+            
+            nameLabel.textColor = isHighlighted
+                ? .white
+                : .black
+            
+            icon.tintColor = isHighlighted
+                ? .white
+                : .darkGray
+        }
+    }
+    
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -33,8 +51,6 @@ class SettingCell: BaseCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ic-settings")
         imageView.contentMode = .scaleAspectFill
-        
-        imageView.tintColor = .gray
         return imageView
         
     }()
