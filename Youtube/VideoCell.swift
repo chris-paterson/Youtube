@@ -37,7 +37,7 @@ class VideoCell: BaseCell {
                 titleLabelHeightConstraint?.constant = (estimatedRect.size.height > 20)
                     ? 44
                     : 20
-            }   
+            }
         }
     }
     

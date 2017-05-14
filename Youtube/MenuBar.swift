@@ -37,6 +37,23 @@ class MenuBar: UIView {
         // Highlight home button when the view starts.
         let indexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        
+        setupHorizontalBar()
+    }
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        addSubview(horizontalBarView)
+        
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
     }
     
     
@@ -45,8 +62,8 @@ class MenuBar: UIView {
     }
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension MenuBar: UICollectionViewDelegate, UICollectionViewDataSource {
+// MARK: - UICollectionViewDelegate
+extension MenuBar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -59,7 +76,18 @@ extension MenuBar: UICollectionViewDelegate, UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * (frame.width / 4)
+        horizontalBarLeftAnchorConstraint?.constant = x
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
+
+extension MenuBar: UICollectionViewDataSource { }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension MenuBar: UICollectionViewDelegateFlowLayout {
