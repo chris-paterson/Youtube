@@ -14,7 +14,6 @@ class MenuCell: BaseCell {
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "ts-blank-space")
         iv.image?.withRenderingMode(.alwaysTemplate)
         iv.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13, alpha: 1)
         return iv
