@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsLauncher: NSObject {
     let cellId = "cellId"
+    let cellHeight: CGFloat = 50
     
     let blackView = UIView()
     
@@ -40,8 +41,8 @@ class SettingsLauncher: NSObject {
             window.addSubview(blackView)
             window.addSubview(collectionView) // Make sure we add after blackView
             
-            let height: CGFloat = 200
-            let y = window.frame.height - 200 // Pin to bottom
+            let height: CGFloat = CGFloat(settings.count) * cellHeight
+            let y = window.frame.height - height // Pin to bottom
             collectionView.frame = CGRect(x: 0, y: window.frame.height,
                                           width: window.frame.width, height: height)
             
@@ -73,7 +74,6 @@ class SettingsLauncher: NSObject {
         }
     }
     
-    
     override init() {
         super.init()
         collectionView.dataSource = self
@@ -98,7 +98,7 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension SettingsLauncher: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return CGSize(width: collectionView.frame.width, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
