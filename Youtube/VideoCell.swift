@@ -37,7 +37,7 @@ class VideoCell: BaseCell {
                 titleLabelHeightConstraint?.constant = (estimatedRect.size.height > 20)
                     ? 44
                     : 20
-            }
+            }   
         }
     }
     
@@ -91,7 +91,7 @@ class VideoCell: BaseCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         textView.textColor = .lightGray
-        
+        textView.isUserInteractionEnabled = false
         return textView
     }()
     
