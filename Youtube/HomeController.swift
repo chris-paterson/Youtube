@@ -53,6 +53,7 @@ class HomeController: UICollectionViewController {
                     let video = Video()
                     video.title = dictionary["title"] as? String
                     video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
+                    video.numberOfViews = dictionary["number_of_views"] as? NSNumber
                     
                     let channelDictionary = dictionary["channel"] as! [String: AnyObject]
                     let channel = Channel()

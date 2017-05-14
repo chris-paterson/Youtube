@@ -91,6 +91,7 @@ class VideoCell: BaseCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         textView.textColor = .lightGray
+        
         return textView
     }()
     
