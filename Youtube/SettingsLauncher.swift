@@ -16,12 +16,12 @@ class SettingsLauncher: NSObject {
     
     let settings: [Setting] = {
         return [
-            Setting(name: "Settings", iconName: "ic-settings"),
-            Setting(name: "Terms & Privacy Policy", iconName: "ic-lock"),
-            Setting(name: "Send Feedback", iconName: "ic-feedback"),
-            Setting(name: "Help", iconName: "ic-help"),
-            Setting(name: "Switch Account", iconName: "ic-account-circle-black"),
-            Setting(name: "Cancel", iconName: "ic-cancel")
+            Setting(name: .setting, iconName: "ic-settings"),
+            Setting(name: .termsAndPrivacyPolicy, iconName: "ic-lock"),
+            Setting(name: .sendFeedback, iconName: "ic-feedback"),
+            Setting(name: .help, iconName: "ic-help"),
+            Setting(name: .switchAccount, iconName: "ic-account-circle-black"),
+            Setting(name: .cancel, iconName: "ic-cancel")
         ]
     }()
     
@@ -73,7 +73,7 @@ class SettingsLauncher: NSObject {
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 }
         }) { completed in
-            if setting.name != "" && setting.name != "Cancel" {
+            if setting.name != .cancel {
                 self.homeController?.showControllerForSetting(setting: setting)
             }
         }

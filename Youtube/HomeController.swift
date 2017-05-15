@@ -94,7 +94,7 @@ class HomeController: UICollectionViewController {
         let dummySettingViewController = UIViewController()
         
         dummySettingViewController.view.backgroundColor = .white
-        dummySettingViewController.navigationItem.title = setting.name
+        dummySettingViewController.navigationItem.title = setting.name.rawValue
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes =
             [NSForegroundColorAttributeName: UIColor.white]
@@ -102,6 +102,13 @@ class HomeController: UICollectionViewController {
         navigationController?.pushViewController(dummySettingViewController, animated: true)
     }
     
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 4
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return videos?.count ?? 0
